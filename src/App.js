@@ -2,12 +2,44 @@ import logo from './logo.svg';
 import './App.css';
 import './Chat.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Main from './Components/Main_WhatsappComponent';
+import LoginComponent from './Components/LoginComponent';
+import SignUpComponent from './Components/SignUpComponent';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+import { useState } from 'react';
 
 function App() {
+
+  const [isAuthenticatedState, setIsAuthenticatedState] = useState(false);
+
   return (
     <div className="App">
-    <Main/>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            {isAuthenticatedState ?
+              <Main /> :
+              <Redirect to={{ pathname: '/login' }} />
+            }
+          </Route>
+          <Route path="/login">
+            <LoginComponent />
+          </Route>
+          <Route path="/register">
+            <SignUpComponent />
+          </Route>
+          <Route path="*">
+            <Redirect to={{ pathname: '/' }} />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
