@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
-import Chat from './Chat'
-import Search from './Search'
+import Chat from './ChatComponent'
+import Search from './SearchComponent'
 
 export default function Main_WhatsappComponeat() {
     return (
