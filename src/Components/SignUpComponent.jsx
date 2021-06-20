@@ -1,7 +1,46 @@
 import React from 'react'
 import { Form, Button, Col, Row, Alert } from "react-bootstrap";
 
+import { useState } from 'react';
+import { useHistory } from "react-router-dom";
+
+import axios from 'axios';
+
 export default function SignUp() {
+
+    const [fullNameState , setFullNameState] = useState("");
+    const [usernameState , setUsernameState] = useState("");
+    const [passwordState , setPasswordState] = useState("");
+    const [confirmPasswordState , setConfirmPasswordState] = useState("");
+    const [errorState , setErrorState] = useState(null);
+
+    function register(){
+        if(fullNameState.trim() == ""){
+            setErrorState("Full name can not be empty");
+            return;
+          }
+        if(usernameState.trim() == ""){
+            setErrorState("User name can not be empty");
+            return;
+          }
+    
+          if(passwordState.trim() == ""){
+            setErrorState("password can not be empty");
+            return;
+          }
+
+          if(confirmPasswordState !== passwordState){
+            setErrorState("password does not match confirm password");
+            return;
+          }
+
+          axios.post("").then(res => {
+            history.push("/login");
+          }).catch(err => {
+            setErrorState(err.message)
+          })
+    }
+
     return (
         <div>
             <Form className="mt-5" className='container' style={{ color : "black" ,border: "1px solid black",marginBottom:"20px",padding:"10px"}}>
@@ -9,12 +48,16 @@ export default function SignUp() {
                     <Col md={8}>
                         <Form.Row>
                             <Col md={12}>
+                            { errorState && <p style={{ color: "red" }} >{errorState}</p> }
                                 <Form.Label>Full Name</Form.Label>
                                 <Form.Control
                                     placeholder="Full name"
                                     name="name"
                                     style={{textAlign:"center",width:"400px",marginLeft:"160px"}}
-                                    required />
+                                    required 
+                                    value={fullNameState}
+                                    onChange={(e) =>  setFullNameState(e.target.value)}
+                                    />
                             </Col>
                         </Form.Row>
                         <Form.Row >
@@ -26,7 +69,10 @@ export default function SignUp() {
                                         placeholder="User Name"
                                         name="Username"
                                         style={{textAlign:"center",width:"400px",marginLeft:"160px"}}
-                                        required />
+                                        required
+                                        value={usernameState}
+                                        onChange={(e) =>  setUsernameState(e.target.value)}
+                                        />
                                 </Form.Group>
                             </Col>
                         </Form.Row>
@@ -39,7 +85,10 @@ export default function SignUp() {
                                         placeholder="Password"
                                         name="Password"
                                         style={{textAlign:"center",width:"400px",marginLeft:"160px"}}
-                                        required />
+                                        required
+                                        value={passwordState}
+                                        onChange={(e) =>  setPasswordState(e.target.value)}
+                                        />
                                 </Form.Group>
                             </Col>
                         </Form.Row>
@@ -55,7 +104,10 @@ export default function SignUp() {
                                         placeholder="Confirm Password"
                                         name="Confirm Password"
                                         style={{textAlign:"center",width:"400px",marginLeft:"160px"}}
-                                        required />
+                                        required
+                                        value={confirmPasswordState}
+                                        onChange={(e) =>  setConfirmPasswordState(e.target.value)}
+                                        />
                                 </Form.Group>
                                
                             </Col>
@@ -67,8 +119,7 @@ export default function SignUp() {
 
                         <Button
                             variant="outline-secondary"
-                            type="submit"
-
+                            onClick={register}
                         >
                             Submit
                         </Button>

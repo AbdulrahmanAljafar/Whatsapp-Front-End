@@ -18,6 +18,12 @@ import { useState } from 'react';
 function App() {
 
   const [isAuthenticatedState, setIsAuthenticatedState] = useState(false);
+  const [tokenState, setTokenState] = useState(null);
+
+  function setToken(token){
+    setTokenState(token);
+    setIsAuthenticatedState(true);
+  }
 
   return (
     <div className="App">
@@ -30,7 +36,7 @@ function App() {
             }
           </Route>
           <Route path="/login">
-            <LoginComponent />
+            <LoginComponent setToken={setToken} />
           </Route>
           <Route path="/register">
             <SignUpComponent />
