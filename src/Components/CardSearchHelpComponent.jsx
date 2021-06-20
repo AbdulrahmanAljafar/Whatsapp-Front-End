@@ -8,7 +8,7 @@ export default function CardSearchHelp(props) {
 
 
         <div>
-           <div>
+           <div style={{paddingTop:"20px"}}>
             <a href="#">
                 <Container>
                     <Row>
