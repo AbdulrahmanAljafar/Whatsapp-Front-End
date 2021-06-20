@@ -5,7 +5,8 @@ import Avatar from '@material-ui/core/Avatar'
 export default function Users() {
     return (
         <>
-            <div>
+       
+            <div style={{paddingTop:"20px"}}>
                 <a href="#">
                     <Container>
                         <Row>
@@ -20,6 +21,7 @@ export default function Users() {
                     </Container>
                 </a>
             </div>
+            <hr style={{backgroundColor:"#33383b"}}/>
             <div>
                 <a href="#">
                     <Container>

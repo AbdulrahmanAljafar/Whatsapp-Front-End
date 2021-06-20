@@ -13,8 +13,13 @@ export default function Search() {
     const [searchHelp,setsearchHelp]=useState(["test","test1","test2","test3","test4","Abdulrahman"])
 
     const onChangeInput = (event) => {
+        console.log(event)
         console.log(event.target.value)
-        setSearch(event.target.value);
+        if(event.key == "Enter"){
+            setSearch(event.target.value);
+        } else if(event.target.value.trim() == ""){
+            setSearch('')
+        }
       };
 
 
@@ -35,11 +40,11 @@ export default function Search() {
  
 
     return (
-        <div style={{position:"relative"}}>
-            <InputGroup className="mb-3">
-                <FormControl placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={(e) => onChangeInput(e)} />
+        <div style={{position:"relative",backgroundColor:"#131c21" }} className="search">
+            <InputGroup >
+                <FormControl style={{backgroundColor:"#1f2428" ,Color:"white"}}  placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2" onKeyUp={(e) => onChangeInput(e)}  />
             </InputGroup>
-                <div style={{position:"fixed",backgroundColor:"white",width:"400px",zIndex:"2"}}>
+                <div style={{position:"absolute",backgroundColor:"#1f2428",width:"100%",zIndex:"2"}}>
                 {allsearchHelp}
                 </div>
             <Users />
